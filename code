@@ -1,0 +1,48 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import hilbert2, chirp
+import csv
+rf_matrix = np.loadtxt(open("RF.csv","rb"),delimiter=',',skiprows=0)
+analytic_signal = hilbert2(rf_matrix,None)
+hilbert_data = np.abs(analytic_signal)
+np.savetxt('Hilbert.csv',hilbert_data,delimiter=',')
+
+import csv
+from PIL import Image
+from pylab import *
+
+import numpy
+my_matrix = numpy.loadtxt(open("Hilbert.csv","rb"),delimiter=",",skiprows=0) 
+
+print(my_matrix)
+
+imshow(my_matrix)
+
+import cv2
+res = cv2.resize(my_matrix, dsize=(3118, 3118), interpolation=cv2.INTER_CUBIC)
+
+imshow(res)
+
+[[ 92975.42242514 108517.58894774 100678.18360096 ... 129990.00492947
+  158043.78911267 164505.12999505]
+ [ 63486.43867283 101540.78306388  92536.14112538 ... 118180.06562747
+  175124.58005626 119677.95326687]
+ [102693.40198666  89771.83574614 155499.02028075 ... 170877.22431521
+  186177.47732221 113951.47894884]
+ ...
+ [ 88033.70551982 109822.98676285 108505.26388625 ... 130727.95774
+  142346.12357164 122534.10082618]
+ [ 76092.79776276 102777.74356564  94807.30742893 ... 122782.77334487
+  136684.05631497 122193.44126775]
+ [117895.24515179 135853.47586172 137758.10504557 ... 154934.75434206
+  171659.83094847 147914.25924241]]
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+<ipython-input-10-19eac9201e42> in <module>
+     19 imshow(my_matrix)
+     20 
+---> 21 import cv2
+     22 res = cv2.resize(my_matrix, dsize=(3118, 3118), interpolation=cv2.INTER_CUBIC)
+     23 
+
+ModuleNotFoundError: No module named 'cv2'
